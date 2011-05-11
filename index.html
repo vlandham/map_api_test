@@ -45,6 +45,7 @@
     };
 
     var joco_region;
+    var waldo_region;
     map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
 
@@ -54,7 +55,15 @@
           new google.maps.LatLng(38.88408470638818, -94.97783660888672),
           new google.maps.LatLng(39.06384844477397, -95.0430679321289),
           new google.maps.LatLng(39.106087295867496, -94.81407165527344)
-          ];
+            ];
+
+    var waldo_region_cords = [
+      new google.maps.LatLng(39.028385605401425, -94.60782051086426),
+          new google.maps.LatLng(39.02665200282546, -94.55486297607422),
+          new google.maps.LatLng(38.99864176306861, -94.55692291259766),
+          new google.maps.LatLng(38.90733151751686, -94.52362060546875),
+          new google.maps.LatLng(38.910804525446686, -94.60807800292969)
+      ];
 
     joco_region = new google.maps.Polygon({
       paths: joco_region_cords,
@@ -65,10 +74,21 @@
       fillOpacity: 0.35
       });
 
+    waldo_region = new google.maps.Polygon({
+      paths: waldo_region_cords,
+      strokeColor: "#00FF00",
+      strokeOpactiy: 0.8,
+      strokeWeight: 2,
+      fillColor: "#00FF00",
+      fillOpacity: 0.35
+      });
+
+
     joco_region.setMap(map);
+    waldo_region.setMap(map);
   // Add a listener for the click event
   google.maps.event.addListener(joco_region, 'click', showJoco);
-
+  google.maps.event.addListener(waldo_region, 'click', showWaldo);
   infowindow = new google.maps.InfoWindow();
 }
 
@@ -88,6 +108,24 @@ function showJoco(event) {
 
   infowindow.open(map);
 }
+
+function showWaldo(event) {
+
+  // Since this Polygon only has one path, we can call getPath()
+  // to return the MVCArray of LatLngs
+  var vertices = this.getPath();
+
+  var contentString = "<b>Waldo Region</b><br />";
+  contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
+  contentString += "<a href=\"/\">Click to Sign Up!</a>";
+
+  // Replace our Info Window's content and position
+  infowindow.setContent(contentString);
+  infowindow.setPosition(event.latLng);
+
+  infowindow.open(map);
+}
+
 
 </script>
 </head>
