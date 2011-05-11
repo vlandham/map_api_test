@@ -37,7 +37,7 @@
   function initialize() {
     var latlng = new google.maps.LatLng(39.114053, -94.6274636);
     var myOptions = {
-      zoom: 9,
+      zoom: 11,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -62,8 +62,30 @@
       fillColor: "#FF0000",
       fillOpacity: 0.35
       });
+
     joco_region.setMap(map);
-  }
+  // Add a listener for the click event
+  google.maps.event.addListener(joco_region, 'click', showJoco);
+
+  infowindow = new google.maps.InfoWindow();
+}
+
+function showJoco(event) {
+
+  // Since this Polygon only has one path, we can call getPath()
+  // to return the MVCArray of LatLngs
+  var vertices = this.getPath();
+
+  var contentString = "<b>Johnson County Region</b><br />";
+  contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
+  contentString += "<a href="/">Click to Sign Up!</a>";
+
+  // Replace our Info Window's content and position
+  infowindow.setContent(contentString);
+  infowindow.setPosition(event.latLng);
+
+  infowindow.open(map);
+}
 
 </script>
 </head>
