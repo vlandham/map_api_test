@@ -65,6 +65,16 @@
           new google.maps.LatLng(38.910804525446686, -94.60807800292969)
       ];
 
+    var northland_region_cords = [
+      new google.maps.LatLng(39.115144700901475, -94.6087646484375),
+          new google.maps.LatLng(39.15668728161543, -94.6527099609375),
+          new google.maps.LatLng(39.17904621051262, -94.72000122070312),
+          new google.maps.LatLng(39.214167307512355, -94.78317260742188),
+          new google.maps.LatLng(39.223742741391284, -94.317626953125),
+          new google.maps.LatLng(39.16839998800283, -94.383544921875),
+          new google.maps.LatLng(39.13964713662539, -94.46182250976562),
+          new google.maps.LatLng(39.118341154165186, -94.58267211914062)
+      ];
     joco_region = new google.maps.Polygon({
       paths: joco_region_cords,
       strokeColor: "#69D2E7",
@@ -83,12 +93,22 @@
       fillOpacity: 0.6
       });
 
+    northland_region = new google.maps.Polygon({
+      paths: northland_region_cords,
+      strokeColor: "#53777A",
+      strokeOpactiy: 0.8,
+      strokeWeight: 0,
+      fillColor: "#53777A",
+      fillOpacity: 0.6
+      });
 
     joco_region.setMap(map);
     waldo_region.setMap(map);
+    northland_region.setMap(map);
   // Add a listener for the click event
   google.maps.event.addListener(joco_region, 'click', showJoco);
   google.maps.event.addListener(waldo_region, 'click', showWaldo);
+  google.maps.event.addListener(northland_region, 'click', showNorthland);
   infowindow = new google.maps.InfoWindow();
 }
 
@@ -117,6 +137,24 @@ function showWaldo(event) {
   var vertices = this.getPath();
 
   var contentString = "<b>Waldo Region</b><br />";
+  contentString += "<br />";
+  //contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
+  contentString += "<a href=\"/\">Click to Sign Up!</a>";
+
+  // Replace our Info Window's content and position
+  infowindow.setContent(contentString);
+  infowindow.setPosition(event.latLng);
+
+  infowindow.open(map);
+}
+
+function showNorthland(event) {
+
+  // Since this Polygon only has one path, we can call getPath()
+  // to return the MVCArray of LatLngs
+  var vertices = this.getPath();
+
+  var contentString = "<b>Northland Region</b><br />";
   contentString += "<br />";
   //contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
   contentString += "<a href=\"/\">Click to Sign Up!</a>";
