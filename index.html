@@ -37,12 +37,32 @@
   function initialize() {
     var latlng = new google.maps.LatLng(39.114053, -94.6274636);
     var myOptions = {
-      zoom: 11,
+      zoom: 9,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
+    var joco_region;
     var map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
+
+    var joco_region_cords = [
+          new google.maps.LatLng(39.001309882896514, -94.60807800292969),
+          new google.maps.LatLng(38.88395108203396, -94.60833549499512),
+          new google.maps.LatLng(38.88408470638818, -94.97783660888672),
+          new google.maps.LatLng(39.06384844477397, -95.0430679321289),
+          new google.maps.LatLng(39.106087295867496, -94.81407165527344)
+          ];
+
+    joco_region = new google.maps.Polygon({
+      paths: joco_region_cords,
+      strokeColor: "#FF0000",
+      strokeOpactiy: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35
+      });
+    joco_region.setMap(map);
   }
 
 </script>
