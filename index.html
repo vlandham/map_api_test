@@ -9,6 +9,7 @@
     body {
       margin-top: 1.0em;
       background-color: #ffffff;
+      background-image: url("stripes.png");
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #000000;
     }
@@ -16,10 +17,10 @@
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
+    h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; margin-left:auto; margin-right:auto;text-align:center; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #000000; }
+    h2 { font-size: 1.5em; color: #000000; text-align:center;}
     h3 { text-align: center; color: #000000; }
     a { color: #000000; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
@@ -29,6 +30,7 @@
     .footer { text-align:center; padding-top:30px; font-style: italic; }
     html { height: 100% }
     body { height: 100%; margin: 0px; padding: 0px }
+    #map_canvas {margin:auto}
   </style>
 <script type="text/javascript"
     src="http://maps.google.com/maps/api/js?sensor=false">
@@ -37,11 +39,12 @@
   var map;
   var infowindow;
   function initialize() {
-    var latlng = new google.maps.LatLng(39.114053, -94.6274636);
+    var latlng = new google.maps.LatLng(39.05758374935667, -94.62593078613281)
     var myOptions = {
       zoom: 11,
       center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
     };
 
     var joco_region;
@@ -170,7 +173,11 @@ function showNorthland(event) {
 </script>
 </head>
 <body onload="initialize()">
-  <div id="map_canvas" style="width:100%; height:100%"></div>
+  <h1>Kansas City Neighborhoods</h1>
+  <div id="map_canvas" style="width:800px; height:600px;"></div>
+  <br />
+  <h2>Click your closest Region to Sign up!</h2>
+  <br />
 </body>
 </html>
 
